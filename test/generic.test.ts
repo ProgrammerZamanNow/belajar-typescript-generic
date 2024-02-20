@@ -134,4 +134,33 @@ describe('generic', () => {
         // const data4 = new EmployeeData<number>(100); // error
     });
 
+    it('should support array', async () => {
+        const array = new Array<string>();
+        array.push("Eko");
+        array.push("Kurniawan");
+
+        expect(array[0]).toBe("Eko");
+        expect(array[1]).toBe("Kurniawan");
+    });
+
+    it('should support set', async () => {
+        const set = new Set<string>();
+        set.add("Eko");
+        set.add("Kurniawan");
+        set.add("Eko");
+
+        expect(set.size).toBe(2);
+        expect(set.has("Eko")).toBe(true);
+        expect(set.has("Kurniawan")).toBe(true);
+    });
+
+    it('should support map', async () => {
+        const map = new Map<string, number>();
+        map.set("Eko", 100);
+        map.set("Budi", 96);
+
+        expect(map.get("Eko")).toBe(100);
+        expect(map.get("Budi")).toBe(96);
+    });
+
 });
