@@ -74,7 +74,7 @@ describe('generic', () => {
 
     });
 
-    class SimpleGeneric<T> {
+    class SimpleGeneric<T = string> {
         private value?: T;
 
         setValue(value: T){
@@ -87,7 +87,7 @@ describe('generic', () => {
     }
 
     it('should create simple generic', async () => {
-        const simple = new SimpleGeneric<string>();
+        const simple = new SimpleGeneric();
         simple.setValue("Eko");
         // simple.setValue(100);
         // simple.setValue(true);
