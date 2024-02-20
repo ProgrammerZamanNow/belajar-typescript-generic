@@ -77,7 +77,7 @@ describe('generic', () => {
     class SimpleGeneric<T = string> {
         private value?: T;
 
-        setValue(value: T){
+        setValue(value: T) {
             this.value = value;
         }
 
@@ -93,6 +93,45 @@ describe('generic', () => {
         // simple.setValue(true);
 
         expect(simple.getValue()!.toUpperCase()).toBe("Eko");
+    });
+
+    interface Employee {
+        id: string;
+        name: string;
+    }
+
+    interface Manager extends Employee {
+        totalEmployee: number;
+    }
+
+    interface VP extends Manager {
+        totalManager: number;
+    }
+
+    class EmployeeData<T extends Employee> {
+        constructor(public employee: T) {
+        }
+    }
+
+    it('should support constraint', async () => {
+        const data1 = new EmployeeData<Employee>({
+            id: "100",
+            name: "Eko"
+        });
+        const data2 = new EmployeeData<Manager>({
+            id: "100",
+            name: "Eko",
+            totalEmployee: 100
+        });
+        const data3 = new EmployeeData<VP>({
+            id: "100",
+            name: "Eko",
+            totalEmployee: 100,
+            totalManager: 10
+        });
+
+        // const data4 = new EmployeeData<string>("Eko"); // error
+        // const data4 = new EmployeeData<number>(100); // error
     });
 
 });
