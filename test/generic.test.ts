@@ -6,6 +6,14 @@ describe('generic', () => {
         constructor(value: T) {
             this.value = value;
         }
+
+        get(): T {
+            return this.value;
+        }
+
+        set(value: T){
+            this.value = value;
+        }
     }
 
     it('should support multiple data type', async () => {
@@ -20,6 +28,20 @@ describe('generic', () => {
         // dataString.value = true; // error
         const upper = dataString.value.toUpperCase();
         expect(upper).toBe("EKO");
+
+    });
+
+    function create<T>(value: T): T {
+        return value;
+    }
+
+    it('should support function generic', async () => {
+
+        const result: string = create<string>("Eko");
+        expect(result).toBe("Eko");
+
+        const result2: number = create<number>(123);
+        expect(result2).toBe(123);
 
     });
 
